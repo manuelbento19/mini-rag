@@ -2,7 +2,9 @@ import requests
 from mini_rag.config import ollama
 
 def ask_to_llm(prompt):
-    request = requests.post(f"{ollama["url"]}/api/chat", json={
+    url = f"{ollama["url"]}/api/chat"
+
+    payload = {
         "model": ollama["model"],
         "stream": False,
         "messages": [
@@ -11,6 +13,10 @@ def ask_to_llm(prompt):
                 "content": prompt
             }
         ]
-    })
-
-    return request.json()["message"]["content"]
+    }
+    
+    response = requests.post(
+        url,
+        json=payload,
+    )
+    return response.json()["message"]["content"]
