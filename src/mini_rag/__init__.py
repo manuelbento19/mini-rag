@@ -1,2 +1,4 @@
 def main() -> None:
-    print("Hello from mini-rag!")
+    from mini_rag.cli import main as cli_main
+
+    cli_main()
